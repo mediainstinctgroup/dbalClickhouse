@@ -794,11 +794,10 @@ class ClickHousePlatform extends AbstractPlatform
             $engineOptions .= ')';
 			//TODO поддержка парционирования через определение таблицы
 	        $sql[] = sprintf(
-		        'CREATE TABLE IF NOT EXISTS  %s (%s) ENGINE = %s([\'%s\']) PARTITION BY toYYYYMM(%s) ORDER BY (%s) SETTINGS index_granularity=%s',
+		        'CREATE TABLE IF NOT EXISTS  %s (%s) ENGINE = %s() PARTITION BY toYYYYMM(%s) ORDER BY (%s) SETTINGS index_granularity=%s',
 		        $tableName,
 		        $this->getColumnDeclarationListSQL($columns),
 		        $engine,
-		        $columns[$options['versionColumn']]['name'],
 		        $eventDateColumnName,
 		        implode(', ', array_unique($primaryIndex)),
 		        $indexGranularity
